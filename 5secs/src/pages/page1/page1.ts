@@ -33,6 +33,7 @@ export class Page1 {
 
     // On click event
     map.on('click', (e) => {
+      (document.activeElement as any).blur();
       if (currentMarker === undefined) {
         currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
       } else {
