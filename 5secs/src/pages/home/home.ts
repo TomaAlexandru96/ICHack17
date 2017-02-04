@@ -3,7 +3,6 @@ import {Geolocation} from 'ionic-native'
 import { NavController } from 'ionic-angular';
 
 declare var L;
-var loc;
 
 @Component({
   selector: 'page-home',
