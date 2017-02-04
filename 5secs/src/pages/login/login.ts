@@ -23,8 +23,7 @@ export class LoginPage {
     Facebook.login(["public_profile", "email"])
     .then((response) => {
       // send response to server
-      console.log(response);
-      HTTP.post('http://13.74.168.159/users/', response, {})
+      HTTP.post('http://13.74.168.159/users/', response['authResponse'], {})
       .then((serverResponse) => {
         this.login(serverResponse);
       })
@@ -37,8 +36,8 @@ export class LoginPage {
     });
   }
 
-  login(userInfo) {
+  login(serverInfo) {
     this.navCtrl.setRoot(Page1);
-    user.login();
+    this.user.login(serverInfo['data']);
   }
 }

@@ -32,7 +32,7 @@ export class MyApp {
   logout() {
     this.nav.setRoot(LoginPage);
     this.menu.close();
-    user.logout();
+    this.user.logout();
     Facebook.logout();
   }
 }
