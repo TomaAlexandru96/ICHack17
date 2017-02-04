@@ -6,7 +6,6 @@ declare var L;
 var map;
 var coordinates;
 var currentMarker = undefined;
-var currentJson;
 
 @Component({
   selector: 'page-page1',
@@ -38,12 +37,9 @@ export class Page1 {
       if (currentMarker === undefined) {
         currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
       } else {
-        currentMarker.coordinates = [e.latlng.lat, e.latlng.lng];
+        currentMarker.setLatLng(e.latlng);
         currentMarker.update();
       }
-      console.log(currentJson.geometry.coordinates);
-      var myLayer = L.mapbox.featureLayer().setGeoJSON(currentJson).addTo(map);
-      map.scrollWheelZoom.disable();
     });
   }
 
