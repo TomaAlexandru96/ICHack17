@@ -11,9 +11,12 @@ def main():
 
 @app.route('/testDB')
 def test_DB():
-    import os, re
-    import pyodbc
-    return os.environ["MYSQLCONNSTR_localdb"]
+    try:
+        import os, re
+        import pyodbc
+        return os.environ["MYSQLCONNSTR_localdb"]
+    except Exception as e:
+        return e.message(), 400
 #    server = 'yourserver.database.windows.net'
 #    database = 'yourdatabase'
 #    username = 'yourusername'
