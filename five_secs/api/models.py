@@ -9,6 +9,8 @@ class User(models.Model):
 
 class Event(models.Model):
     token_id = models.ForeignKey(User)
-    rate = models.PositiveSmallIntegerField()
-    video = models.FileField()
+    rate = models.PositiveSmallIntegerField(null=True)
+    video = models.FileField(null=True)
     description = models.TextField()
+    longitude = models.FloatField()
+    latitude = models.FloatField()
