@@ -23,14 +23,21 @@ export class LoginPage {
     .then((response) => {
       // send response to server
       this.navCtrl.setRoot(Page1);
-      this.login(response);
+      HTTP.post('13.74.168.159/users', response, {})
+      .then((serverResponse) => {
+        this.login(serverResponse);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     })
     .catch((err) => {
       this.navCtrl.setRoot(Page1);
-      console.log(err);
+      console.error(err);
     });
   }
 
   login(userInfo) {
+    console.log(userInfo);
   }
 }

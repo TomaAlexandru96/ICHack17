@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { Nav, Platform, MenuController } from 'ionic-angular';
+import { Facebook, StatusBar, Splashscreen } from 'ionic-native';
 
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
@@ -12,9 +12,9 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Page1;
+  rootPage: any = LoginPage;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, public menu: MenuController) {
     this.initializeApp();
   }
 
@@ -25,5 +25,11 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  logout() {
+    this.nav.setRoot(LoginPage);
+    this.menu.close();
+    Facebook.logout();
   }
 }
