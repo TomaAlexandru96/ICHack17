@@ -25,8 +25,11 @@ export class Page1 {
         resp.coords.longitude
       ];
       L.marker(coordinates).addTo(map);
+    });
 
-
+    map.on('click', (e) => {
+      alert(e);
+      console.log("here");
     });
   }
 
