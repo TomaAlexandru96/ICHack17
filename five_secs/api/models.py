@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 class User(models.Model):
-    token_id = models.CharField(max_length=256)
+    token_id = models.CharField(max_length=256, unique=True)
     name = models.CharField(max_length=256)
     picture_url = models.URLField()
 
