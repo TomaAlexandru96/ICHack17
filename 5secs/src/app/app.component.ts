@@ -5,6 +5,7 @@ import { Facebook, StatusBar, Splashscreen } from 'ionic-native';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { LoginPage } from '../pages/login/login';
+import { CurrentUserService } from '../providers/current_user';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,7 +15,8 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  constructor(public platform: Platform, public menu: MenuController) {
+  constructor(public platform: Platform, public menu: MenuController,
+                            public user: CurrentUserService) {
     this.initializeApp();
   }
 
@@ -30,6 +32,7 @@ export class MyApp {
   logout() {
     this.nav.setRoot(LoginPage);
     this.menu.close();
+    user.logout();
     Facebook.logout();
   }
 }
