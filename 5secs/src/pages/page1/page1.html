@@ -20,9 +20,9 @@
   <ion-searchbar style="z-index: 10;" (ionInput)="getItems($event)"></ion-searchbar>
   <div [hidden]="main != 'map'">
     <div id='map-one' class='map'> </div>
-    <ion-fab bottom right>
-      <button ion-fab color="secondary" (click)="positionMe()">
-        <img src="assets/gps.png">
+    <ion-fab style="z-index: 2147483647;" bottom right>
+      <button ion-fab color="#ff0000" (click)="positionMe()">
+        <img src="assets/gpsWhite.png">
       </button>
     </ion-fab>
   </div>
