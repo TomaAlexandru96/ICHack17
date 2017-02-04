@@ -7,7 +7,9 @@ declare var L;
 var map;
 var coordinates;
 var currentMarker = undefined;
-var events;
+var eventJSON;
+var eventMarkers = [];
+
 /*
 var currentJson =
   {
@@ -73,7 +75,7 @@ export class Page1 {
         //events = HTTP.post('server', {coordinates}, {});
       } finally {
         // mostly demo reasons, we don't want things to fail even at worst case at demo
-        events =
+        eventJSON =
           [{
             name: "IC HACK",
             lat: 51.49868324935443,
@@ -91,11 +93,12 @@ export class Page1 {
            }];
       }
       // plot them
-      for (var e in events) {
-        L.marker([events[e].lat, events[e].lng]).addTo(map); // should store to remove later
+      for (var e in eventJSON) {
+        eventMarkers.push(L.marker([eventJSON[e].lat, eventJSON[e].lng]).addTo(map));
+        eventMarkers[e].addEventListener('click', ((e) => {this.gotoEventPage(eventJSON[e])}).bind(this, e), false);
       }
-    });
 
+    });
 
     // On click event
     map.on('click', (e) => {
@@ -107,6 +110,12 @@ export class Page1 {
         currentMarker.update();
       }
     });
+  }
+
+
+  gotoEventPage(e) {
+    console.log(e);
+    // goto event's page without destroying the map
   }
 
   positionMe() {
