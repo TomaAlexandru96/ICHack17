@@ -4,12 +4,6 @@ import { NavController } from 'ionic-angular';
 import { HTTP } from 'ionic-native';
 
 declare var L;
-var map;
-var coordinates;
-var currentMarker = undefined;
-var eventJSON;
-var eventMarkers = [];
-
 /*
 var currentJson =
   {
@@ -54,6 +48,11 @@ var eventJson =
   templateUrl: 'page1.html'
 })
 export class Page1 {
+  map;
+  coordinates;
+  currentMarker = undefined;
+  eventJSON;
+  eventMarkers = [];
   main = "map";
 
   constructor(public navCtrl: NavController) {
@@ -62,21 +61,21 @@ export class Page1 {
 
   ngAfterViewInit() {
     L.mapbox.accessToken = 'pk.eyJ1IjoiZmFuZ3lpIiwiYSI6ImNpeXI5dXBuZzAwMGszM3FudTQ3bG9tcDQifQ.25ONADCYigEjnEHUo0pRWg';
-    map = L.mapbox.map('map-one', 'mapbox.streets', {zoomControl: false}).locate();
+    this.map = L.mapbox.map('map-one', 'mapbox.streets', {zoomControl: false}).locate();
     Geolocation.getCurrentPosition().then((resp) => {
-      map.setView([resp.coords.latitude, resp.coords.longitude], 14);
-      coordinates =  [
+      this.map.setView([resp.coords.latitude, resp.coords.longitude], 14);
+      this.coordinates =  [
         resp.coords.latitude,
         resp.coords.longitude
       ];
-      L.marker(coordinates).addTo(map); // What if you move?
+      L.marker(this.coordinates).addTo(this.map); // What if you move?
 
       // get all events in radius 1km
       try {
         //events = HTTP.post('server', {coordinates}, {});
       } finally {
         // mostly demo reasons, we don't want things to fail even at worst case at demo
-        eventJSON =
+        this.eventJSON =
           [{
             name: "IC HACK",
             lat: 51.49868324935443,
@@ -94,22 +93,22 @@ export class Page1 {
            }];
       }
       // plot them
-      for (var e in eventJSON) {
-        eventMarkers.push(L.marker([eventJSON[e].lat, eventJSON[e].lng]).addTo(map));
-        eventMarkers[e].addEventListener('click', ((e) => {this.gotoEventPage(eventJSON[e])}).bind(this, e), false);
+      for (var e in this.eventJSON) {
+        this.eventMarkers.push(L.marker([this.eventJSON[e].lat, this.eventJSON[e].lng]).addTo(this.map));
+        this.eventMarkers[e].addEventListener('click', ((e) => {this.gotoEventPage(this.eventJSON[e])}).bind(this, e), false);
       }
 
     });
 
     // On click event
-    map.on('click', (e) => {
+    this.map.on('click', (e) => {
       (document.activeElement as any).blur();
-      if (currentMarker === undefined) {
-        currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+      if (this.currentMarker === undefined) {
+        this.currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
       } else {
-        currentMarker.setLatLng(e.latlng);
+        this.currentMarker.setLatLng(e.latlng);
         console.log(e.latlng);
-        currentMarker.update();
+        this.currentMarker.update();
       }
     });
   }
@@ -121,7 +120,7 @@ export class Page1 {
   }
 
   positionMe() {
-    map.setView(coordinates, 14);
+    this.map.setView(this.coordinates, 14);
   }
 
   getItems($event) {

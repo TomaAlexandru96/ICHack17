@@ -13,7 +13,7 @@ import { CurrentUserService } from '../providers/current_user';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = Page1;
 
   constructor(public platform: Platform, public menu: MenuController,
                             public user: CurrentUserService) {
