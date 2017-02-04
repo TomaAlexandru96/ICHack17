@@ -3,6 +3,8 @@ import { Geolocation } from 'ionic-native'
 import { NavController } from 'ionic-angular';
 
 declare var L;
+var map;
+var coordinates;
 
 @Component({
   selector: 'page-page1',
@@ -14,20 +16,24 @@ export class Page1 {
 
   }
 
-    ngOnInit() {
-      L.mapbox.accessToken = 'pk.eyJ1IjoiZmFuZ3lpIiwiYSI6ImNpeXI5dXBuZzAwMGszM3FudTQ3bG9tcDQifQ.25ONADCYigEjnEHUo0pRWg';
-      var map = L.mapbox.map('map-one', 'mapbox.streets').locate();
-      Geolocation.getCurrentPosition().then((resp) => {
-        map.setView([resp.coords.latitude, resp.coords.longitude], 14);
+  ngOnInit() {
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZmFuZ3lpIiwiYSI6ImNpeXI5dXBuZzAwMGszM3FudTQ3bG9tcDQifQ.25ONADCYigEjnEHUo0pRWg';
+    map = L.mapbox.map('map-one', 'mapbox.streets').locate();
+    Geolocation.getCurrentPosition().then((resp) => {
+      map.setView([resp.coords.latitude, resp.coords.longitude], 14);
 
-        var coordinates =  [
-          resp.coords.latitude,
-          resp.coords.longitude
-        ];
-        L.marker(coordinates).addTo(map);
+      coordinates =  [
+        resp.coords.latitude,
+        resp.coords.longitude
+      ];
+      L.marker(coordinates).addTo(map);
 
 
-      });
-    }
+    });
+  }
+
+  positionMe() {
+    map.setView(coordinates, 14);
+  }
 
 }
