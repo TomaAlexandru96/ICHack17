@@ -13,7 +13,7 @@ def main():
 def test_DB():
     import os, re
     import pyodbc
-    print os.environ["MYSQLCONNSTR_localdb"]
+    return os.environ["MYSQLCONNSTR_localdb"]
 #    server = 'yourserver.database.windows.net'
 #    database = 'yourdatabase'
 #    username = 'yourusername'
