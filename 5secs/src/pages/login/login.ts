@@ -4,6 +4,7 @@ import { Facebook } from 'ionic-native';
 import { Page1 } from '../page1/page1';
 import { HTTP } from 'ionic-native';
 import { MyApp } from '../../app/app.component';
+import { CurrentUserService } from '../../providers/current_user';
 
 @Component({
   selector: 'page-login',
@@ -11,7 +12,7 @@ import { MyApp } from '../../app/app.component';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public user: CurrentUserService) {
   }
 
   googleClicked() {
@@ -22,15 +23,21 @@ export class LoginPage {
     Facebook.login(["public_profile", "email"])
     .then((response) => {
       // send response to server
-      this.navCtrl.setRoot(Page1);
-      this.login(response);
+      HTTP.post('http://13.74.168.159/users/', response['authResponse'], {})
+      .then((serverResponse) => {
+        this.login(serverResponse);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     })
     .catch((err) => {
-      this.navCtrl.setRoot(Page1);
-      console.log(err);
+      console.error(err);
     });
   }
 
-  login(userInfo) {
+  login(serverInfo) {
+    this.navCtrl.setRoot(Page1);
+    this.user.login(serverInfo['data']);
   }
 }

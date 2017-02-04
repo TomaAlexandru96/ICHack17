@@ -28,6 +28,17 @@
   </div>
 
   <div [hidden]="main != 'list'">
-    List
+    <ion-list>
+      <ion-card *ngFor="let event of this.eventJSON">
+        <ion-card-header>
+          {{event.name}}
+        </ion-card-header>
+
+        <ion-card-content>
+          "Lat": {{event.lat}}<br>
+          "Lng": {{event.lng}}
+        </ion-card-content>
+    </ion-card>
+    </ion-list>
   </div>
 </ion-content>

@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { Nav, Platform, MenuController } from 'ionic-angular';
+import { Facebook, StatusBar, Splashscreen } from 'ionic-native';
 
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { LoginPage } from '../pages/login/login';
+import { CurrentUserService } from '../providers/current_user';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,7 +15,8 @@ export class MyApp {
 
   rootPage: any = Page1;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, public menu: MenuController,
+                            public user: CurrentUserService) {
     this.initializeApp();
   }
 
@@ -25,5 +27,12 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  logout() {
+    this.nav.setRoot(LoginPage);
+    this.menu.close();
+    this.user.logout();
+    Facebook.logout();
   }
 }
