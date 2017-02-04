@@ -21,11 +21,6 @@ export class HomePage {
     Geolocation.getCurrentPosition().then((resp) => {
       map.setView([resp.coords.latitude, resp.coords.longitude], 14);
 
-    var coordinates =  [
-      resp.coords.latitude,
-      resp.coords.longitude
-    ];
-
 
 });
 
