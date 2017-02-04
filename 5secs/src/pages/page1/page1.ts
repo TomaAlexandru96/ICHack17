@@ -5,6 +5,8 @@ import { NavController } from 'ionic-angular';
 declare var L;
 var map;
 var coordinates;
+var currentMarker = undefined;
+var currentJson;
 
 @Component({
   selector: 'page-page1',
@@ -26,9 +28,22 @@ export class Page1 {
         resp.coords.latitude,
         resp.coords.longitude
       ];
-      L.marker(coordinates).addTo(map);
+      L.marker(coordinates).addTo(map); // What if you move?
+
+    });
 
 
+    // On click event
+    map.on('click', (e) => {
+      if (currentMarker === undefined) {
+        currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+      } else {
+        currentMarker.coordinates = [e.latlng.lat, e.latlng.lng];
+        currentMarker.update();
+      }
+      console.log(currentJson.geometry.coordinates);
+      var myLayer = L.mapbox.featureLayer().setGeoJSON(currentJson).addTo(map);
+      map.scrollWheelZoom.disable();
     });
   }
 
