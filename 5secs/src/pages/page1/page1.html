@@ -3,16 +3,31 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Event App</ion-title>
+    <div>
+      <ion-segment [(ngModel)]="main">
+        <ion-segment-button value="map">
+          Map
+        </ion-segment-button>
+        <ion-segment-button value="list">
+          List
+        </ion-segment-button>
+      </ion-segment>
+    </div>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div id='map-one' class='map'> </div>
-  <ion-fab bottom right>
-    <button ion-fab (click)="positionMe()">
-      <img src="assets/gps.png">
-    </button>
-  </ion-fab>
+  <ion-searchbar style="z-index: 10;" (ionInput)="getItems($event)"></ion-searchbar>
+  <div [hidden]="main != 'map'">
+    <div id='map-one' class='map'> </div>
+    <ion-fab bottom right>
+      <button ion-fab color="secondary" (click)="positionMe()">
+        <img src="assets/gps.png">
+      </button>
+    </ion-fab>
+  </div>
 
+  <div [hidden]="main != 'list'">
+    List
+  </div>
 </ion-content>

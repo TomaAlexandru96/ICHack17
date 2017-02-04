@@ -1,0 +1,23 @@
+#login-ion-content {
+  background: url("../assets/login_background.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 1;
+  color: white;
+}
+
+#login-wrapper {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+#login-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.button {
+  opacity: 0.9;
+}

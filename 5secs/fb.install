@@ -1,0 +1,1 @@
+ionic plugin add cordova-plugin-facebook4 --save --variable APP_ID="17248239944972 --variable APP_NAME="ICHack17"
