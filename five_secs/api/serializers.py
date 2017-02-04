@@ -9,5 +9,5 @@ class UserSerializer(serializers.ModelSerializer):
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ('token_id', 'rate', 'video', 'description', 'longitude', 'latitude')
+        fields = ('id', 'token_id', 'rate', 'video', 'description', 'longitude', 'latitude')
         read_only_fields = ('rate',  'video')
