@@ -20,6 +20,14 @@ export class HomePage {
     var map = L.mapbox.map('map-one', 'mapbox.streets').locate();
     Geolocation.getCurrentPosition().then((resp) => {
       map.setView([resp.coords.latitude, resp.coords.longitude], 14);
-    });
+
+    var coordinates =  [
+      resp.coords.latitude,
+      resp.coords.longitude
+    ];
+
+
+});
+
   }
 }
