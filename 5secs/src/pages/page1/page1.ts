@@ -24,6 +24,7 @@ export class Page1 {
           resp.coords.latitude,
           resp.coords.longitude
         ];
+        L.marker(coordinates).addTo(map);
 
 
       });
