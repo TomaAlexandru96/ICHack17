@@ -61,6 +61,7 @@ export class EventCreationPage {
       };
     HTTP.post("http://13.74.168.159/events/", data, {})
     .then((response) => {
+      this.params.data['return'].refresh();
       this.navCtrl.pop();
     })
     .catch((err) => {

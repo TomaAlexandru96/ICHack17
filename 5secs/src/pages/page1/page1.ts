@@ -3,6 +3,7 @@ import { Geolocation } from 'ionic-native'
 import { NavController } from 'ionic-angular';
 import { HTTP } from 'ionic-native';
 import { EventCreationPage } from '../event_creation/event_creation';
+import { Page2 } from '../page2/page2';
 
 declare var L;
 
@@ -37,7 +38,6 @@ export class Page1 {
   });
 
   constructor(public navCtrl: NavController) {
-
   }
 
   ngAfterViewInit() {
@@ -85,7 +85,6 @@ export class Page1 {
         this.currentMarker = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.currentIcon}).addTo(this.map);
       } else {
         this.currentMarker.setLatLng(e.latlng);
-        console.log(e.latlng);
         this.currentMarker.update();
       }
     });
@@ -126,6 +125,7 @@ export class Page1 {
 
       // e.latlng.lat, e.latlng.lng, address
       this.navCtrl.push(EventCreationPage, {
+        return: this,
         address: address,
         latitude: e.getLatLng().lat,
         longitude: e.getLatLng().lng
@@ -137,8 +137,7 @@ export class Page1 {
   }
 
   gotoEventPage(e) {
-    console.log(e);
-    // goto event's page without destroying the map
+    this.navCtrl.push(Page2, e);
   }
 
   positionMe() {
