@@ -7,11 +7,11 @@
 </ion-header>
 
 <ion-content>
-  <form>
+  <form #formCtrl="ngForm">
     <ion-list inset>
       <ion-item>
         <ion-label fixed>Event Name</ion-label>
-        <ion-input name="name" [(ngModel)]="name" type="text" value=""></ion-input>
+        <ion-input required name="name" [(ngModel)]="name" type="text" value=""></ion-input>
       </ion-item>
 
       <ion-item>
@@ -41,9 +41,9 @@
 
       <ion-item>
         <ion-label stacked>Description</ion-label>
-        <ion-textarea name="description" [(ngModel)]="description"></ion-textarea>
+        <ion-textarea required name="description" [(ngModel)]="description"></ion-textarea>
       </ion-item>
     </ion-list>
-    <button type="submit" (click)="createEvent()" ion-button full color="secondary">Create</button>
+    <button type="submit" [disabled]="!formCtrl.form.valid" (click)="createEvent()" ion-button full color="secondary">Create</button>
 </form>
 </ion-content>
