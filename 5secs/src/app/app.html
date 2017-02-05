@@ -5,8 +5,8 @@
   </ion-header>
 
   <ion-content>
-    <img [src]="this.user.user?.picture_url">
-    {{this.user.user?.name}}
+    <img [src]="this.user.user?.picture_url" style="border-radius: 50%">
+    <h1 style="align: center">{{this.user.user?.name}}</h1>
     <button style="position:absolute;bottom:0px;" (click)="logout()" ion-button full color="danger">Logout</button>
   </ion-content>
 
