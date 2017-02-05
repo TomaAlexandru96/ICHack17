@@ -8,6 +8,8 @@ import requests
 from django.db.backends.signals import connection_created
 from django.dispatch import receiver
 import math
+from api.forms import VideoForm
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 @receiver(connection_created)
 def extend_sqlite(connection=None, **kwargs):
@@ -148,3 +150,29 @@ def user_detail(request, pk):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
+def video_upload(request):
+    import os
+    form = VideoForm(request.POST, request.FILES)
+    if form.is_valid():
+        event_id = form.cleaned_data["event_id"]
+        try:
+            event = Event.objects.get(pk=event_id)
+        except Event.DoesNotExist:
+            return Response("Invalid event id", status=status.HTTP_400_BAD_REQUEST)
+        video = request.FILES['video']
+    else:
+        print 1
+        return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
+    if not os.path.exists("static"):
+        os.mkdir("static")
+    filename = str(event_id) + os.path.splitext(video.name)[1]
+    with open(os.path.join("static", filename), "wb") as dest:
+        for chunk in video.chunks():
+            dest.write(chunk)
+    event.video = static(filename)
+    event.save()
+    serializer = EventSerializer(event)
+    return Response(serializer.data, status=status.HTTP_200_OK)

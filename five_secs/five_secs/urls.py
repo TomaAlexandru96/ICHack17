@@ -16,11 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from api import views
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^events/$', views.event_list),
     url(r'^events/(?P<pk>[0-9]+)/$', views.event_detail),
     url(r'^users/$', views.user_list),
     url(r'^users/(?P<pk>[0-9]+)/$', views.user_detail),
+    url(r'^upload_video/$', views.video_upload),
     url(r'^admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
