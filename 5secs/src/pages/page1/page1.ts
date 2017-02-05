@@ -60,7 +60,9 @@ export class Page1 {
                                     radius: 1
                                   },{});
         console.log(this.eventJSON);
-      } finally {
+      } catch (err) {
+      }
+      finally {
         // mostly demo reasons, we don't want things to fail even at worst case at demo
         this.eventJSON =
           [{
