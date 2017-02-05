@@ -169,6 +169,7 @@ export class Page1 {
     console.log(loc);
     if (this.geocoder !== undefined) {
       this.geocoder.query(loc, ((err, data) => {this.goto2(err, data)} ).bind(this));
+      this.searchedItems = [];
     }
   }
   goto2(err, data) {
