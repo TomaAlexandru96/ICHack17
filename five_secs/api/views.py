@@ -48,7 +48,11 @@ def event_list(request):
             )
             events = Event.objects.raw(query)
         except Exception:
-            events = Event.objects.all()
+            title = request.GET.get("title")
+            if title != None and title != "":
+                events = Event.objects.filter(title__icontains=title)
+            else:
+                events = Event.objects.all()
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
 
