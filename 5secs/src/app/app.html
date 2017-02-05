@@ -1,12 +1,12 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <img src="{{this.user.user.picture_url}}">
-      {{this.user.user.name}}
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
+    <img [src]="this.user.user?.picture_url">
+    {{this.user.user?.name}}
     <button style="position:absolute;bottom:0px;" (click)="logout()" ion-button full color="danger">Logout</button>
   </ion-content>
 

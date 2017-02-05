@@ -16,7 +16,6 @@ export class LoginPage {
   }
 
   googleClicked() {
-
   }
 
   facebookClicked() {

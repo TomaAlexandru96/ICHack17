@@ -9,7 +9,7 @@ export class CurrentUserService {
 
   public login(userInfo) {
     this.user = userInfo;
-    this.user.loggedIn = true;
+    this.user['loggedIn'] = true;
   }
 
   public logout() {

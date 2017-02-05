@@ -14,7 +14,7 @@ import { CurrentUserService } from '../providers/current_user';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = EventCreationPage;
+  rootPage: any = LoginPage;
 
   constructor(public platform: Platform, public menu: MenuController,
                             public user: CurrentUserService) {
