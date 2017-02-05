@@ -149,7 +149,9 @@ export class Page1 {
 
   getItems($event) {
     console.log($event.target.value);
-    this.geocoder.query($event.target.value, ((err, data) => {this.showMap(err, data)} ).bind(this));
+    if (this.geocoder !== undefined) {
+      this.geocoder.query($event.target.value, ((err, data) => {this.showMap(err, data)} ).bind(this));
+    }
   }
 
   showMap(err, data) {
@@ -160,11 +162,20 @@ export class Page1 {
     for (var x in data.results.features) {
       this.searchedItems.push({name: data.results.features[x].place_name});
     }
-    //if (data.lbounds) {
-    //    this.map.fitBounds(data.lbounds);
-    //} else if (data.latlng) {
-    //    this.map.setView([data.latlng[0], data.latlng[1]], 13);
-    //}
   }
 
+  // we search twice.. we are running out of time
+  goto(loc) {
+    console.log(loc);
+    if (this.geocoder !== undefined) {
+      this.geocoder.query(loc, ((err, data) => {this.goto2(err, data)} ).bind(this));
+    }
+  }
+  goto2(err, data) {
+    if (data.lbounds) {
+        this.map.fitBounds(data.lbounds);
+    } else if (data.latlng) {
+        this.map.setView([data.latlng[0], data.latlng[1]], 13);
+    }
+  }
 }

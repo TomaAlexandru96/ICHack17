@@ -20,7 +20,7 @@
   <div>
     <ion-searchbar style="z-index: 10;" (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
-      <ion-item style="z-index: 50;" *ngFor="let item of searchedItems">
+      <ion-item style="z-index: 50;" (click)="goto(item.name)" *ngFor="let item of searchedItems">
         {{item.name}}
       </ion-item>
     </ion-list>
