@@ -92,6 +92,11 @@ def user_list(request):
         try:
             user_id = request.data["userID"]
             token_id = request.data["accessToken"]
+            try:
+                user = User.objects.get(pk=user_id)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except User.DoesNotExist:
+                pass
         except Exception:
             return Response("Invalid", status=status.HTTP_400_BAD_REQUEST)
         r = requests.get("https://graph.facebook.com/v2.8/me?access_token=%s&fields=id,name,picture" % token_id)
