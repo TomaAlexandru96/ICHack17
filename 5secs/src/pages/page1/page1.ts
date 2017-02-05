@@ -97,7 +97,6 @@ export class Page1 {
             {}, {})
         .then((response) => {
           this.eventJSON = JSON.parse(response.data);
-          alert(this.eventJSON);
           this.plot();
         })
         .catch((err) => {
@@ -108,12 +107,11 @@ export class Page1 {
   plot() {
     this.eventMarkers = [];
     for (var e in this.eventJSON) {
-      this.eventMarkers.push(L.marker([this.eventJSON[e].lat, this.eventJSON[e].lng]).addTo(this.map));
+      this.eventMarkers.push(L.marker([this.eventJSON[e].latitude, this.eventJSON[e].longitude]).addTo(this.map));
       this.eventMarkers[e].addEventListener('click',
                                             ((e) => { this.gotoEventPage(this.eventJSON[e]) }).bind(this, e),
                                             false);
     }
-    alert(this.eventMarkers);
   }
 
   newEventCreation() {
