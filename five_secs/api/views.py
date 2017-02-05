@@ -10,6 +10,7 @@ from django.dispatch import receiver
 import math
 from api.forms import VideoForm
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from api.CognitiveServicesVideos import send_video, receive_json
 
 @receiver(connection_created)
 def extend_sqlite(connection=None, **kwargs):
@@ -174,6 +175,7 @@ def video_upload(request):
         for chunk in video.chunks():
             dest.write(chunk)
     event.video = static(filename)
+    event.rate = max(5, int(receive_json(send_video("http://13.74.168.159" + static(filename))) + 0.5))
     event.save()
     serializer = EventSerializer(event)
     return Response(serializer.data, status=status.HTTP_200_OK)

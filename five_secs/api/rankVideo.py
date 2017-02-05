@@ -2,7 +2,6 @@ import json
 
 
 def returnStars(data):
-
     data = json.loads(data)
     content = data['fragments']
 
