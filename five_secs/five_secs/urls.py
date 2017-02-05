@@ -18,8 +18,8 @@ from api import views
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^events/$', views.EventList.as_view()),
-    url(r'^events/(?P<pk>[0-9]+)/$', views.EventDetail.as_view()),
+    url(r'^events/$', views.event_list),
+    url(r'^events/(?P<pk>[0-9]+)/$', views.event_detail),
     url(r'^users/$', views.user_list),
     url(r'^users/(?P<pk>[0-9]+)/$', views.user_detail),
     url(r'^admin/', admin.site.urls),
