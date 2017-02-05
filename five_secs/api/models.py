@@ -9,6 +9,10 @@ class User(models.Model):
 
 class Event(models.Model):
     user_id = models.ForeignKey(User)
+    title = models.CharField(max_length=80)
+    address = models.TextField()
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
     rate = models.PositiveSmallIntegerField(null=True)
     video = models.FileField(null=True)
     description = models.TextField()

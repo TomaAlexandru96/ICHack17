@@ -19,12 +19,17 @@ def extend_sqlite(connection=None, **kwargs):
         cf('radians', 1, math.radians)
         cf('sin', 1, math.sin)
 
+def cleanup_events():
+    import datetime
+    Event.objects.filter(end_time__lte=datetime.datetime.now()).delete()
+
 @api_view(['GET', 'POST'])
 @permission_classes((AllowAny, ))
 def event_list(request):
     """
     List all events, or create a new event.
     """
+    cleanup_events()
     if request.method == 'GET':
         try:
             lat = request.GET.get("latitude")
@@ -42,8 +47,7 @@ def event_list(request):
                 10 # limit
             )
             events = Event.objects.raw(query)
-        except ValueError:
-            print "geolocation fail"
+        except Exception:
             events = Event.objects.all()
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
@@ -61,6 +65,7 @@ def event_detail(request, pk):
     """
     Retrieve, update or delete a event instance.
     """
+    cleanup_events()
     try:
         event = Event.objects.get(pk=pk)
     except Event.DoesNotExist:
