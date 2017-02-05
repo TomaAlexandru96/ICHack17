@@ -14,11 +14,13 @@ declare var L;
 export class Page1 {
   map;
   coordinates;
+  geocoder;
   currentMarker = undefined;
   eventJSON;
   layer;
   eventMarkers = [];
   main = "map";
+  searchedItems = [];
 
   // icons
   userIcon = L.icon({
@@ -43,6 +45,7 @@ export class Page1 {
   ngAfterViewInit() {
     L.mapbox.accessToken = 'pk.eyJ1IjoiZmFuZ3lpIiwiYSI6ImNpeXI5dXBuZzAwMGszM3FudTQ3bG9tcDQifQ.25ONADCYigEjnEHUo0pRWg';
     this.map = L.mapbox.map('map-one', 'mapbox.streets', {zoomControl: false}).locate();
+    this.geocoder = L.mapbox.geocoder('mapbox.places');
 
     Geolocation.getCurrentPosition().then((resp) => {
       this.map.setView([resp.coords.latitude, resp.coords.longitude], 14);
@@ -145,7 +148,23 @@ export class Page1 {
   }
 
   getItems($event) {
-    console.log($event);
+    console.log($event.target.value);
+    this.geocoder.query($event.target.value, ((err, data) => {this.showMap(err, data)} ).bind(this));
+  }
+
+  showMap(err, data) {
+    this.searchedItems = [];
+    if (data === undefined || !data.hasOwnProperty('results')) {
+      return;
+    }
+    for (var x in data.results.features) {
+      this.searchedItems.push({name: data.results.features[x].place_name});
+    }
+    //if (data.lbounds) {
+    //    this.map.fitBounds(data.lbounds);
+    //} else if (data.latlng) {
+    //    this.map.setView([data.latlng[0], data.latlng[1]], 13);
+    //}
   }
 
 }

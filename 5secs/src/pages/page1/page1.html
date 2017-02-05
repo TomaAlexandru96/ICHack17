@@ -17,7 +17,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar style="z-index: 10;" (ionInput)="getItems($event)"></ion-searchbar>
+  <div>
+    <ion-searchbar style="z-index: 10;" (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-list>
+      <ion-item style="z-index: 50;" *ngFor="let item of searchedItems">
+        {{item.name}}
+      </ion-item>
+    </ion-list>
+  </div>
   <div [hidden]="main != 'map'">
     <div id='map-one' class='map'> </div>
     <ion-fab style="z-index: 2147483647;" bottom left>
