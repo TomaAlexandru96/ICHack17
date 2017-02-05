@@ -53,7 +53,13 @@ export class Page1 {
 
       // get all events in radius 1km
       try {
-        //events = HTTP.post('server', {coordinates}, {});
+        this.eventJSON = HTTP.get('13.74.168.159/events/',
+                                  {
+                                    longitude: this.coordinates[0],
+                                    latitude: this.coordinates[1],
+                                    radius: 1
+                                  },{});
+        console.log(this.eventJSON);
       } finally {
         // mostly demo reasons, we don't want things to fail even at worst case at demo
         this.eventJSON =
