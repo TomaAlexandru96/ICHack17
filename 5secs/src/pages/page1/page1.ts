@@ -62,6 +62,7 @@ export class Page1 {
   ngAfterViewInit() {
     L.mapbox.accessToken = 'pk.eyJ1IjoiZmFuZ3lpIiwiYSI6ImNpeXI5dXBuZzAwMGszM3FudTQ3bG9tcDQifQ.25ONADCYigEjnEHUo0pRWg';
     this.map = L.mapbox.map('map-one', 'mapbox.streets', {zoomControl: false}).locate();
+
     Geolocation.getCurrentPosition().then((resp) => {
       this.map.setView([resp.coords.latitude, resp.coords.longitude], 14);
       this.coordinates =  [
@@ -69,7 +70,6 @@ export class Page1 {
         resp.coords.longitude
       ];
       L.marker(this.coordinates).addTo(this.map); // What if you move?
-
       // get all events in radius 1km
       try {
         //events = HTTP.post('server', {coordinates}, {});
@@ -98,7 +98,9 @@ export class Page1 {
         this.eventMarkers[e].addEventListener('click', ((e) => {this.gotoEventPage(this.eventJSON[e])}).bind(this, e), false);
       }
 
-    });
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });;
 
     // On click event
     this.map.on('click', (e) => {
