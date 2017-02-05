@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from 'ionic-native';
+import { HTTP, MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from 'ionic-native';
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
@@ -16,7 +16,15 @@ export class Page2 {
   captureVideo() {
     MediaCapture.captureVideo({limit: 1, duration: 5})
     .then((response) => {
-      console.log(response);
+      HTTP.uploadFile("http://13.74.168.159/upload_video/", {
+        event_id: this.navParams.data['id']
+      }, {}, response[0].fullPath, "video")
+      .then((serverResponse) => {
+        console.log(serverResponse);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
     })
     .catch((err) => {
       console.error(err);
