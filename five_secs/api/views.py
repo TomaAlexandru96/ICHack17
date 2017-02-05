@@ -112,7 +112,7 @@ def user_list(request):
                 pass
         except Exception:
             return Response("Invalid", status=status.HTTP_400_BAD_REQUEST)
-        r = requests.get("https://graph.facebook.com/v2.8/me?access_token=%s&fields=id,name,picture" % token_id)
+        r = requests.get("https://graph.facebook.com/v2.8/me?access_token=%s&fields=id,name,picture.width(400).height(400)&redirect=false" % token_id)
         result = r.json()
         try:
             pic_url = result["picture"]["data"]["url"]
