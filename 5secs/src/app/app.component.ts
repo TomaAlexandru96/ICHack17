@@ -5,6 +5,7 @@ import { Facebook, StatusBar, Splashscreen } from 'ionic-native';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { LoginPage } from '../pages/login/login';
+import { EventCreationPage } from '../pages/event_creation/event_creation';
 import { CurrentUserService } from '../providers/current_user';
 
 @Component({
@@ -13,7 +14,7 @@ import { CurrentUserService } from '../providers/current_user';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Page1;
+  rootPage: any = LoginPage;
 
   constructor(public platform: Platform, public menu: MenuController,
                             public user: CurrentUserService) {

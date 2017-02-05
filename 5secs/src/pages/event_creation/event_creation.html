@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Create Event
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-list inset>
+      <ion-item>
+        <ion-label fixed>Event Name</ion-label>
+        <ion-input name="name" [(ngModel)]="name" type="text" value=""></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Start Date</ion-label>
+        <ion-datetime name="startDate" displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time</ion-label>
+        <ion-datetime name="startTime" [(ngModel)]="startTime" displayFormat="HH:mm"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>End Date</ion-label>
+        <ion-datetime name="endDate" [(ngModel)]="endDate" displayFormat="MM/DD/YYYY"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time</ion-label>
+        <ion-datetime name="endTime" [(ngModel)]="endTime" displayFormat="HH:mm"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Description</ion-label>
+        <ion-textarea name="description" [(ngModel)]="description"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <button type="submit" (click)="createEvent()" ion-button full color="secondary">Create</button>
+</form>
+</ion-content>
