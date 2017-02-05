@@ -145,6 +145,7 @@ export class Page1 {
   }
 
   getItems($event) {
+    console.log($event);
   }
 
 }

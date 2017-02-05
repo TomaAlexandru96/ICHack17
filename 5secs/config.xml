@@ -37,7 +37,7 @@
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
-        <variable name="APP_ID" value="1724823994497256" />
+        <variable name="APP_ID" value="17248239944972" />
         <variable name="APP_NAME" value="ICHack17" />
     </plugin>
 </widget>
