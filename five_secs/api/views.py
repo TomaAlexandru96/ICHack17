@@ -166,7 +166,6 @@ def video_upload(request):
             return Response("Invalid event id", status=status.HTTP_400_BAD_REQUEST)
         video = request.FILES['video']
     else:
-        print 1
         return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
     if not os.path.exists("static"):
         os.mkdir("static")
@@ -175,7 +174,7 @@ def video_upload(request):
         for chunk in video.chunks():
             dest.write(chunk)
     event.video = static(filename)
-    event.rate = max(5, int(receive_json(send_video("http://13.74.168.159" + static(filename))) + 0.5))
+    event.rate = max(5, min(0, int(receive_json(send_video("http://13.74.168.159" + static(filename))) + 0.5)))
     event.save()
     serializer = EventSerializer(event)
     return Response(serializer.data, status=status.HTTP_200_OK)
