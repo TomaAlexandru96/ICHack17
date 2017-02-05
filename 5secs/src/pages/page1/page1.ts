@@ -59,28 +59,51 @@ export class Page1 {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-      // get all events in radius 1km
-        /*
+
       // mostly demo reasons, we don't want things to fail even at worst case at demo
       this.eventJSON =
         [{
-          name: "IC HACK",
-          lat: 51.49868324935443,
-          lng: -0.1772511005401611
+          id: 1,
+          user_id: 845643595578874,
+          "rate": null,
+          "video": null,
+          "description": "Hacks, memes, food",
+          "longitude": -0.1770901679992676,
+          "latitude": 51.4978767468778,
+          "address": "7 Imperial College Rd, Kensington, London SW7 2AZ, UK",
+          "title": "ICHACK17",
+          "start_time": "2017-02-05T08:04:00Z",
+          "end_time": "2017-02-05T09:04:00Z"
          },
          {
-           name: "UNION BAR",
-           lat: 51.500368008689485,
-           lng: -0.17818450927734375
-         },
+           id: 2,
+           user_id: 845643595578874,
+           "rate": null,
+           "video": null,
+           "description": "Come have fun at Union bar with the rest of the department!",
+           "longitude": -0.17818450927734375,
+           "latitude": 51.500368008689485,
+           "address": "Prince Consort Road, Beit Hall, Kensington, London SW7 2AZ, UK",
+           "title": "BAR NIGHT",
+           "start_time": "2017-02-05T08:04:00Z",
+           "end_time": "2017-02-05T09:04:00Z"
+          },
          {
-            name: "COMPUTER LABS",
-            lat: 51.49875170957007,
-            lng: -0.17942905426025388
+           id: 3,
+           user_id: 845643595578874,
+           "rate": null,
+           "video": null,
+           "description": "Come have fun at Union bar with the rest of the department!",
+           "longitude": -0.17942905426025388,
+           "latitude": 51.49875170957007,
+           "address": "Huxley,  South Kensington, London SW7 2AZ, UK",
+           "title": "COMPUTER LABS",
+           "start_time": "2017-02-05T08:04:00Z",
+           "end_time": "2017-02-05T09:04:00Z"
          }];
-         */
-    // plot them
 
+    // plot them
+    this.plot();
     // On click event
     this.map.on('click', (e) => {
       (document.activeElement as any).blur();

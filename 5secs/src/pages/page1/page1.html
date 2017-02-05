@@ -43,12 +43,13 @@
     <ion-list>
       <ion-card *ngFor="let event of this.eventJSON">
         <ion-card-header>
-          {{event.name}}
+          {{event.title}}
         </ion-card-header>
 
         <ion-card-content>
-          "Lat": {{event.lat}}<br>
-          "Lng": {{event.lng}}
+          description: {{event.description}}<br>
+          address: {{event.address}}<br>
+          start_time: {{event.start_time}}
         </ion-card-content>
     </ion-card>
     </ion-list>
