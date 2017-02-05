@@ -4,44 +4,6 @@ import { NavController } from 'ionic-angular';
 import { HTTP } from 'ionic-native';
 
 declare var L;
-/*
-var currentJson =
-  {
-    type: 'Feature',
-    geometry: {
-      type: 'Point',
-      coordinates: [-77.031952, 38.913184]
-    },
-    properties: {
-      'marker-color': '#ffa0d3',
-      'marker-size': 'large',
-    }
-  };
-var userJson =
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-77.031952, 38.913184]
-      },
-      properties: {
-        'marker-color': '#00ff0d3',
-        'marker-size': 'large',
-      }
-    };
-var eventJson =
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [-77.031952, 38.913184]
-        },
-        properties: {
-          'marker-color': '#00f6ff',
-          'marker-size': 'large',
-        }
-      };*/
-
 
 @Component({
   selector: 'page-page1',
@@ -52,8 +14,49 @@ export class Page1 {
   coordinates;
   currentMarker = undefined;
   eventJSON;
+  layer;
   eventMarkers = [];
   main = "map";
+
+  // JSON for layering
+
+  currentJson =
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [-77.031952, 38.913184]
+      },
+      properties: {
+        'marker-color': '#ffa0d3',
+        'marker-size': 'large',
+      }
+    };
+  userJson =
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [-77.031952, 38.913184]
+        },
+        properties: {
+          'marker-color': '#00ff0d3',
+          'marker-size': 'large',
+        }
+      };
+  eventJson =
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [-77.031952, 38.913184]
+          },
+          properties: {
+            'marker-color': '#00f6ff',
+            'marker-size': 'large',
+          }
+        };
+
 
   constructor(public navCtrl: NavController) {
 
@@ -68,7 +71,16 @@ export class Page1 {
         resp.coords.latitude,
         resp.coords.longitude
       ];
-      L.marker(this.coordinates).addTo(this.map); // What if you move?
+      var userIcon = L.icon({
+	      iconUrl: 'assets/userIcon.png',
+        iconSize: [38, 95],
+	       iconAnchor: [22, 94],
+	        popupAnchor: [-3, -76],
+	         shadowSize: [68, 95],
+	          shadowAnchor: [22, 94]
+      });
+      //this.layer = L.mapbox.featureLayer().setGeoJSON(this.userJson).addTo(this.map);
+      L.marker(this.coordinates, {icon: userIcon}).addTo(this.map); // What if you move?
 
       // get all events in radius 1km
       try {
