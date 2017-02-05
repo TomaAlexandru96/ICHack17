@@ -10,7 +10,7 @@ export class Page2 {
   data = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
+    this.data = navParams.data;
   }
 
   captureVideo() {

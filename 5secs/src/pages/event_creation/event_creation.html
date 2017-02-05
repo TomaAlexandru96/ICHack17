@@ -15,6 +15,11 @@
       </ion-item>
 
       <ion-item>
+        <ion-label fixed>Address</ion-label>
+        <ion-input type="text" value="{{this.params.data['address']}}" disabled="true"></ion-input>
+      </ion-item>
+
+      <ion-item>
         <ion-label>Start Date</ion-label>
         <ion-datetime name="startDate" displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
       </ion-item>
