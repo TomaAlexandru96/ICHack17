@@ -16,6 +16,16 @@ export class LoginPage {
   }
 
   googleClicked() {
+    // demo
+    this.login(
+      {
+        data: JSON.stringify({
+          user_id: 845643595578874,
+          name: "Alexandru Toma",
+          picture_url: "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/11954636_601113870031849_6228280437209174273_n.jpg?oh=399176e065b698422604f58ab303c52f&oe=590D36B5"
+        })
+      }
+    );
   }
 
   facebookClicked() {
@@ -37,6 +47,6 @@ export class LoginPage {
 
   login(serverInfo) {
     this.navCtrl.setRoot(Page1);
-    this.user.login(serverInfo['data']);
+    this.user.login(JSON.parse(serverInfo.data));
   }
 }

@@ -18,9 +18,6 @@ export class EventCreationPage {
 
   constructor(public navCtrl: NavController, public params: NavParams, public user: CurrentUserService) {
     this.setUpTimes();
-    this.params.data['longitude'] = 50;
-    this.params.data['latitude'] = 20;
-    this.params.data['address'] = "akncjs";
   }
 
   setUpTimes() {
@@ -52,20 +49,18 @@ export class EventCreationPage {
   }
 
   createEvent() {
-  var data = {
-      user_id: this.user.user['user_id'],
-      title: this.name,
-      address: this.params.data['address'],
-      start_time: this.getISO(this.startDate, this.startTime),
-      end_time: this.getISO(this.endDate, this.endTime),
-      description: this.description,
-      longitude: this.params.data['longitude'],
-      latitude: this.params.data['latitude']
-    }
-
+    var data = {
+        user_id: (this.user.user as any).user_id,
+        title: this.name,
+        address: this.params.data['address'],
+        start_time: this.getISO(this.startDate, this.startTime),
+        end_time: this.getISO(this.endDate, this.endTime),
+        description: this.description,
+        longitude: this.params.data['longitude'],
+        latitude: this.params.data['latitude']
+      };
     HTTP.post("http://13.74.168.159/events/", data, {})
     .then((response) => {
-      console.log(response);
       this.navCtrl.pop();
     })
     .catch((err) => {
