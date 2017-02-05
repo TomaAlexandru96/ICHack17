@@ -82,7 +82,9 @@ export class Page1 {
       // plot them
       for (var e in this.eventJSON) {
         this.eventMarkers.push(L.marker([this.eventJSON[e].lat, this.eventJSON[e].lng]).addTo(this.map));
-        this.eventMarkers[e].addEventListener('click', ((e) => {this.gotoEventPage(this.eventJSON[e])}).bind(this, e), false);
+        this.eventMarkers[e].addEventListener('click',
+                                              ((e) => { this.gotoEventPage(this.eventJSON[e]) }).bind(this, e),
+                                              false);
       }
 
     });
@@ -92,14 +94,28 @@ export class Page1 {
       (document.activeElement as any).blur();
       if (this.currentMarker === undefined) {
         this.currentMarker = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.currentIcon}).addTo(this.map);
+        this.currentMarker.addEventListener('onclick',
+                                            () => { this.newEventCreation(this.currentMarker) },
+                                            false);
       } else {
         this.currentMarker.setLatLng(e.latlng);
         console.log(e.latlng);
         this.currentMarker.update();
       }
+
     });
   }
 
+  newEventCreation(e) {
+    // demo-safe
+    var address;
+    try {
+      address = HTTP.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=" + e.latlng.lat + "," + e.latlng, {}, {});
+      address = address.results[0].formatted_address
+    } catch (err) {}
+    // e.latlng.lat, e.latlng.lng, address
+    console.log(e);
+  }
 
   gotoEventPage(e) {
     console.log(e);
