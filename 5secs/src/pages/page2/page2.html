@@ -1,12 +1,15 @@
 <ion-header>
   <ion-navbar>
-    {{data.title}}
+    <h1 style="text-align: center;">{{data.title}}</h1>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   {{data.address}}
+  <br>
   {{data.start_time}} - {{data.end_time}}
+  <br>
+  {{data.rate}}
   <br><br>
   {{data.description}}
   <button ion-button (click)="captureVideo()"> Capture </button>

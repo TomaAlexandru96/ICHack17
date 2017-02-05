@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HTTP, MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from 'ionic-native';
+import { StreamingMedia, StreamingVideoOptions, HTTP, MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from 'ionic-native';
 import { NavController, NavParams } from 'ionic-angular';
 declare var FileTransfer;
 declare var FileUploadOptions;
@@ -10,9 +10,30 @@ declare var FileUploadOptions;
 })
 export class Page2 {
   data = {};
+  vid;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.data = navParams.data;
+    // this.data['start'] = this.convertToString(this.data['start_time']);
+    // this.data['end'] = this.convertToString(this.data['end_time']);
+    this.getVideos();
+  }
+
+  convertToString(date) {
+    var d = new Date(date);
+    return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+  }
+
+  getVideos() {
+    alert("http://13.74.168.159/" + this.data['video']);
+
+    let options: StreamingVideoOptions = {
+      successCallback: () => { console.log('Video played') },
+      errorCallback: (e) => { console.log(e) },
+      orientation: 'landscape'
+    };
+
+    StreamingMedia.playVideo("https://www.doc.ic.ac.uk/~ii515/video.mp4", options);
   }
 
   captureVideo() {
