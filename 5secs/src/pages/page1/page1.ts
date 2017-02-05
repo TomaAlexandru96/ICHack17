@@ -18,45 +18,22 @@ export class Page1 {
   eventMarkers = [];
   main = "map";
 
-  // JSON for layering
+  // icons
+  userIcon = L.icon({
+    iconUrl: 'assets/marker-user.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
 
-  currentJson =
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-77.031952, 38.913184]
-      },
-      properties: {
-        'marker-color': '#ffa0d3',
-        'marker-size': 'large',
-      }
-    };
-  userJson =
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [-77.031952, 38.913184]
-        },
-        properties: {
-          'marker-color': '#00ff0d3',
-          'marker-size': 'large',
-        }
-      };
-  eventJson =
-        {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [-77.031952, 38.913184]
-          },
-          properties: {
-            'marker-color': '#00f6ff',
-            'marker-size': 'large',
-          }
-        };
-
+  currentIcon = L.icon({
+    iconUrl: 'assets/marker-current.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
 
   constructor(public navCtrl: NavController) {
 
@@ -71,16 +48,8 @@ export class Page1 {
         resp.coords.latitude,
         resp.coords.longitude
       ];
-      var userIcon = L.icon({
-	      iconUrl: 'assets/userIcon.png',
-        iconSize: [38, 95],
-	       iconAnchor: [22, 94],
-	        popupAnchor: [-3, -76],
-	         shadowSize: [68, 95],
-	          shadowAnchor: [22, 94]
-      });
       //this.layer = L.mapbox.featureLayer().setGeoJSON(this.userJson).addTo(this.map);
-      L.marker(this.coordinates, {icon: userIcon}).addTo(this.map); // What if you move?
+      L.marker(this.coordinates, {icon: this.userIcon}).addTo(this.map); // What if you move?
 
       // get all events in radius 1km
       try {
@@ -116,7 +85,7 @@ export class Page1 {
     this.map.on('click', (e) => {
       (document.activeElement as any).blur();
       if (this.currentMarker === undefined) {
-        this.currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
+        this.currentMarker = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.currentIcon}).addTo(this.map);
       } else {
         this.currentMarker.setLatLng(e.latlng);
         console.log(e.latlng);
